@@ -1,14 +1,10 @@
 import { FunctionComponent } from 'react';
-import { TabNames } from '..';
 import './form-tabs.styles.css';
-
-interface FormTabsProps {
-  activeTab: TabNames;
-}
+import { useFormContext, TabName } from '../../../context/form.context';
 
 interface FormTabProps {
   name: string;
-  activeTab: TabNames;
+  activeTab: TabName;
 }
 
 const FormTab: FunctionComponent<FormTabProps> = ({ name, activeTab }) => (
@@ -17,14 +13,17 @@ const FormTab: FunctionComponent<FormTabProps> = ({ name, activeTab }) => (
   </div>
 );
 
-export const FormTabs: FunctionComponent<FormTabsProps> = ({ activeTab }) => (
-  <div className="form-tabs">
-    {['User', 'Privacy', 'Done'].map((tab) => (
-      <FormTab
-        key={tab}
-        name={tab}
-        activeTab={activeTab}
-      />
-    ))}
-  </div>
-);
+export const FormTabs: FunctionComponent = () => {
+  const { activeTab } = useFormContext();
+  return (
+    <div className="form-tabs">
+      {['User', 'Privacy', 'Done'].map((tab) => (
+        <FormTab
+          key={tab}
+          name={tab}
+          activeTab={activeTab}
+        />
+      ))}
+    </div>
+  );
+};

@@ -1,12 +1,13 @@
-// import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import { Form } from './components/form';
+import { FormProvider } from './context/form.context';
 
 function App() {
   return (
     <div className="App">
-      <Form />
+      <FormProvider>
+        <Form />
+      </FormProvider>
     </div>
   );
 }
