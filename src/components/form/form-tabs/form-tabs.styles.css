@@ -1,0 +1,25 @@
+.form-tabs {
+  @apply flex
+  m-2
+  border-2
+  border-black;
+}
+
+.form-tabs__tab {
+  @apply border-l-2
+  border-black;
+}
+
+.form-tabs__tab:first-of-type {
+  @apply border-l-0;
+}
+
+.form-tabs__tab--active {
+  @apply bg-blue-400;
+}
+
+.form-tabs__name {
+  @apply px-14
+  py-4
+  font-semibold;
+}

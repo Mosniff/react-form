@@ -1,0 +1,8 @@
+.form {
+  @apply w-full
+  mt-10
+  flex
+  justify-center;
+}
+
+.form__wrapper {}
