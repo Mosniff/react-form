@@ -7,10 +7,11 @@ interface FormFieldProps {
   required: boolean;
   type?: string;
   error?: string;
+  submitAttempted?: boolean
 }
 
 export const FormField: FunctionComponent<FormFieldProps> = ({
-  name, required, type, error,
+  name, required, type, error, submitAttempted,
 }) => {
   const { userFormDetails, setUserFormDetails } = useFormContext();
   const [touched, setTouched] = useState(false);
@@ -32,7 +33,7 @@ export const FormField: FunctionComponent<FormFieldProps> = ({
         onChange={handleChange}
       />
       <div className="form-field__error">
-        <span className={`form-field__error-text ${error && touched ? 'form-field__error-text--show' : ''}`}>{error}</span>
+        <span className={`form-field__error-text ${error && (touched || submitAttempted) ? 'form-field__error-text--show' : ''}`}>{error}</span>
       </div>
     </div>
   );

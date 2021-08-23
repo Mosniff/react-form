@@ -1,5 +1,5 @@
 import React, {
-  FunctionComponent, useCallback, useEffect, useRef,
+  FunctionComponent, useCallback, useEffect, useRef, useState,
 } from 'react';
 import './user-tab.styles.css';
 import { useFormContext } from '../../../../context';
@@ -19,6 +19,8 @@ export const UserTab: FunctionComponent = () => {
     userFormValid,
     setUserFormValid,
   } = useFormContext();
+
+  const [submitAttempted, setSubmitAttempted] = useState(false);
 
   const validEmail = (email: string) => {
     // eslint-disable-next-line max-len
@@ -68,6 +70,7 @@ export const UserTab: FunctionComponent = () => {
 
   const progressForm = () => {
     validateFields();
+    setSubmitAttempted(true);
 
     if (userFormValid) {
       setActiveTab('Privacy');
@@ -81,6 +84,7 @@ export const UserTab: FunctionComponent = () => {
         required={true}
         type="text"
         error={nameError}
+        submitAttempted={submitAttempted}
       />
       <FormField
         name="role"
@@ -92,12 +96,14 @@ export const UserTab: FunctionComponent = () => {
         required={true}
         type="text"
         error={emailError}
+        submitAttempted={submitAttempted}
       />
       <FormField
         name="password"
         required={true}
         type="password"
         error={passwordError}
+        submitAttempted={submitAttempted}
       />
       <SubmitButton
         className="user-tab__submit-button"
