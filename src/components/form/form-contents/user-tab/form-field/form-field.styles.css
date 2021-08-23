@@ -30,11 +30,3 @@
 
   min-height: 20px;
 }
-
-.form-field__error-text {
-  @apply hidden;
-}
-
-.form-field__error-text--show {
-  @apply block;
-}

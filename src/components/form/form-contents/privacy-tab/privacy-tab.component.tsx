@@ -24,7 +24,7 @@ export const PrivacyTab: FunctionComponent = () => {
           className="privacy-tab__option-checkbox"
           type="checkbox"
           checked={updatesByEmail}
-          onClick={() => { setUpdatesByEmail(!updatesByEmail); }}
+          onChange={() => { setUpdatesByEmail(!updatesByEmail); }}
         />
       </label>
       <label className="privacy-tab__option">
@@ -33,7 +33,7 @@ export const PrivacyTab: FunctionComponent = () => {
           className="privacy-tab__option-checkbox"
           type="checkbox"
           checked={otherProductsByEmail}
-          onClick={() => { setOtherProductsByEmail(!otherProductsByEmail); }}
+          onChange={() => { setOtherProductsByEmail(!otherProductsByEmail); }}
         />
       </label>
       <SubmitButton

@@ -23,7 +23,11 @@ export const FormField: FunctionComponent<FormFieldProps> = ({
   return (
     <div className="form-field">
       <div className="form-field__label">
-        <span>{`${name}:`}</span>
+        <label
+          htmlFor={`${name}_input`}
+        >
+          {`${name}:`}
+        </label>
         {required && <span className="form-field__required-indicator">*</span>}
       </div>
       <input
@@ -31,9 +35,10 @@ export const FormField: FunctionComponent<FormFieldProps> = ({
         className="form-field__input"
         type={type}
         onChange={handleChange}
+        id={`${name}_input`}
       />
       <div className="form-field__error">
-        <span className={`form-field__error-text ${error && (touched || submitAttempted) ? 'form-field__error-text--show' : ''}`}>{error}</span>
+        {error && (touched || submitAttempted) && (<span>{error}</span>)}
       </div>
     </div>
   );
