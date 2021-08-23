@@ -1,52 +1,108 @@
-import { FunctionComponent } from 'react';
+import React, {
+  FunctionComponent, useCallback, useEffect, useRef,
+} from 'react';
 import './user-tab.styles.css';
 import { useFormContext } from '../../../../context';
-
-interface FormFieldProps {
-  name: string;
-  required: boolean;
-}
-
-const FormField: FunctionComponent<FormFieldProps> = ({ name, required }) => (
-  <div className="user-tab__form-field">
-    <div className="user-tab__form-field-label">
-      <span>{`${name}:`}</span>
-      {required && <span className="user-tab__form-field-required-indicator">*</span>}
-    </div>
-    <input
-      className="user-tab__form-field-input"
-      type="text"
-    />
-  </div>
-);
+import { SubmitButton } from '../../../common/submit-button';
+import { FormField } from './form-field';
 
 export const UserTab: FunctionComponent = () => {
-  const { setActiveTab } = useFormContext();
+  const {
+    setActiveTab,
+    userFormDetails,
+    nameError,
+    setNameError,
+    emailError,
+    setEmailError,
+    passwordError,
+    setPasswordError,
+    userFormValid,
+    setUserFormValid,
+  } = useFormContext();
+
+  const validEmail = (email: string) => {
+    // eslint-disable-next-line max-len
+    const validEmailPattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    return validEmailPattern.test(email);
+  };
+
+  const validPassword = (password: string) => {
+    const hasNumber = /\d/;
+    return hasNumber.test(password) && password.match(/[a-z]/) && password.match(/[A-Z]/) && password.length > 9;
+  };
+
+  const validateFields = useCallback(() => {
+    setUserFormValid(true);
+    if (userFormDetails.name.length < 1) {
+      setNameError('Name cannot be empty.');
+      setUserFormValid(false);
+    } else {
+      setNameError('');
+    }
+
+    if (!validEmail(userFormDetails.email)) {
+      setEmailError('Must be a valid email address.');
+      setUserFormValid(false);
+    } else {
+      setEmailError('');
+    }
+
+    if (!validPassword(userFormDetails.password)) {
+      setPasswordError('Password must be at least 9 characters and contain a number, an uppercase letter and a lowercase letter.');
+      setUserFormValid(false);
+    } else {
+      setPasswordError('');
+    }
+  }, [userFormDetails, setNameError, setEmailError, setPasswordError, setUserFormValid]);
+
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    validateFields();
+  }, [userFormDetails, validateFields]);
+
+  const progressForm = () => {
+    validateFields();
+
+    if (userFormValid) {
+      setActiveTab('Privacy');
+    }
+  };
+
   return (
     <form className="user-tab">
       <FormField
         name="name"
         required={true}
+        type="text"
+        error={nameError}
       />
       <FormField
         name="role"
         required={false}
+        type="text"
       />
       <FormField
         name="email"
         required={true}
+        type="text"
+        error={emailError}
       />
       <FormField
         name="password"
         required={true}
+        type="password"
+        error={passwordError}
       />
-      <button
+      <SubmitButton
         className="user-tab__submit-button"
-        type="button"
-        onClick={() => { setActiveTab('Privacy'); }}
-      >
-        Submit
-      </button>
+        onClick={() => { progressForm(); }}
+      />
     </form>
   );
 };

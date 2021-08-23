@@ -2,14 +2,8 @@ import { FunctionComponent } from 'react';
 import { useFormContext } from '../../../context';
 import './form-contents.styles.css';
 import { UserTab } from './user-tab';
-
-const DoneTab: FunctionComponent = () => (
-  <div>Done tab</div>
-);
-
-const PrivacyTab: FunctionComponent = () => (
-  <div>Privacy tab</div>
-);
+import { PrivacyTab } from './privacy-tab';
+import { DoneTab } from './done-tab';
 
 export const FormContents: FunctionComponent = () => {
   const { activeTab } = useFormContext();

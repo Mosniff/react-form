@@ -1,0 +1,7 @@
+.submit-button {
+  @apply border-2
+  border-black
+  bg-green-500
+  m-4
+  px-2;
+}

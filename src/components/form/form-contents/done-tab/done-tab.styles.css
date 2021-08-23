@@ -1,0 +1,17 @@
+.done-tab {
+  @apply py-4
+  px-12
+  flex
+  flex-col
+  text-green-600
+  items-center;
+}
+
+.done-tab__tick {
+  @apply w-12
+  my-4;
+}
+
+.done-tab__text {
+  @apply font-bold;
+}

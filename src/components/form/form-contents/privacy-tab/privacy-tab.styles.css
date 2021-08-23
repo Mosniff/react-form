@@ -1,0 +1,26 @@
+.privacy-tab {
+  @apply flex
+  flex-col
+  p-4;
+}
+
+.privacy-tab__option {
+  @apply flex
+  items-center
+  my-2
+  font-semibold;
+}
+
+.privacy-tab__option-text {
+  @apply order-2
+  text-left;
+}
+
+.privacy-tab__option-checkbox {
+  @apply order-1
+  mr-2;
+}
+
+.privacy-tab__submit-button {
+  @apply self-end;
+}

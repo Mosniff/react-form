@@ -1,0 +1,40 @@
+.form-field {
+  @apply w-full
+  p-4;
+}
+
+.form-field__label {
+  @apply flex
+  my-1;
+}
+
+.form-field__required-indicator {
+  @apply mx-2
+  text-red-500;
+}
+
+.form-field__input {
+  @apply border-2
+  border-black
+  w-full
+  py-1
+  px-2
+  font-bold;
+}
+
+.form-field__error {
+  @apply text-red-500
+  text-sm
+  font-semibold
+  mt-1;
+
+  min-height: 20px;
+}
+
+.form-field__error-text {
+  @apply hidden;
+}
+
+.form-field__error-text--show {
+  @apply block;
+}

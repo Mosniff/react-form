@@ -5,4 +5,6 @@
   justify-center;
 }
 
-.form__wrapper {}
+.form__wrapper {
+  @apply w-1/2;
+}

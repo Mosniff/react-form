@@ -5,34 +5,5 @@
 }
 
 .user-tab__submit-button {
-  @apply border-2
-  border-black
-  bg-green-500
-  self-end
-  m-4
-  px-2;
-}
-
-.user-tab__form-field {
-  @apply w-full
-  p-4;
-}
-
-.user-tab__form-field-label {
-  @apply flex
-  my-1;
-}
-
-.user-tab__form-field-required-indicator {
-  @apply mx-2
-  text-red-500;
-}
-
-.user-tab__form-field-input {
-  @apply border-2
-  border-black
-  w-full
-  py-1
-  px-2
-  font-bold;
+  @apply self-end;
 }
